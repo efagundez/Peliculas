@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { tileLayer, latLng, LeafletMouseEvent, Marker, marker, icon } from 'leaflet';
 import { Coordenada } from './coordenada';
 
@@ -12,11 +12,14 @@ export class MapaComponent implements OnInit {
 
   constructor() { }
 
+  @Input()
+  coordenadasIniciales: Coordenada[] = [];
 
   @Output()
   coordenadaSeleccionada: EventEmitter<Coordenada> = new EventEmitter<Coordenada>();
 
   ngOnInit(): void {
+    this.capas = this.coordenadasIniciales.map(valor =>  marker([valor.latitud, valor.longitud]));
   }
 
   options = {
@@ -32,18 +35,24 @@ export class MapaComponent implements OnInit {
   manejarClick(event: LeafletMouseEvent){
     const latitud = event.latlng.lat;
     const longitud = event.latlng.lng;
+    console.log("Tomado del evento del Mapa")
     console.log({latitud, longitud});
 
     this.capas = [];
-    this.capas.push(marker([latitud,longitud], {
+    this.capas.push(
+      marker([latitud,longitud], {
       icon: icon({
         iconSize: [25, 41],
         iconAnchor: [13, 41],
         iconUrl: 'marker-icon.png',
         iconRetinaUrl: 'marker-icon-2x.png',
         shadowUrl: 'assets/marker-shadow.png'
-      })
-    }));
-    this.coordenadaSeleccionada.emit({latitud: latitud, longitud: longitud});
+      }),
+    })
+    );
+    this.coordenadaSeleccionada.emit({
+      latitud: latitud, 
+      longitud: longitud,
+    });
   }
 }

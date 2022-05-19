@@ -1,15 +1,17 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import {HttpClientModule } from '@angular/common/http'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ListadoPeliculasComponent } from './peliculas/listado-peliculas/listado-peliculas.component';
 import { ListadoGenericoComponent } from './utilidades/listado-generico/listado-generico.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {ReactiveFormsModule} from '@angular/forms';
+import {ReactiveFormsModule, FormsModule} from '@angular/forms';
 import {MatSelectModule} from '@angular/material/select';
 import {MarkdownModule} from 'ngx-markdown';
 import {LeafletModule} from '@asymmetrik/ngx-leaflet';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 //import "leaflet/dist/images/marker-shadow.png";
 //import "leaflet/dist/images/marker-icon-2x.png";
 
@@ -35,6 +37,11 @@ import { InputImgComponent } from './utilidades/input-img/input-img.component';
 import { InputMarkdownComponent } from './utilidades/input-markdown/input-markdown.component';
 import { FormularioCineComponent } from './cines/formulario-cine/formulario-cine.component';
 import { MapaComponent } from './utilidades/mapa/mapa.component';
+import { FormularioPeliculaComponent } from './peliculas/formulario-pelicula/formulario-pelicula.component';
+import { SelectorMultipleComponent } from './utilidades/selector-multiple/selector-multiple.component';
+import { AutocompleteActoresComponent } from './actores/autocomplete-actores/autocomplete-actores.component';
+import { MostrarErroresComponent } from './utilidades/mostrar-errores/mostrar-errores.component';
+import { DetallePeliculaComponent } from './peliculas/detalle-pelicula/detalle-pelicula.component';
 
 @NgModule({
   declarations: [
@@ -62,6 +69,11 @@ import { MapaComponent } from './utilidades/mapa/mapa.component';
     InputMarkdownComponent,
     FormularioCineComponent,
     MapaComponent,
+    FormularioPeliculaComponent,
+    SelectorMultipleComponent,
+    AutocompleteActoresComponent,
+    MostrarErroresComponent,
+    DetallePeliculaComponent,
     
   ],
   imports: [
@@ -72,7 +84,10 @@ import { MapaComponent } from './utilidades/mapa/mapa.component';
     MatSelectModule,
     ReactiveFormsModule,
     LeafletModule,
-    MarkdownModule.forRoot()
+    FormsModule,
+    HttpClientModule,
+    MarkdownModule.forRoot(),
+    SweetAlert2Module.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

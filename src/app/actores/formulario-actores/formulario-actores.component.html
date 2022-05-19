@@ -1,3 +1,4 @@
+<app-mostrar-errores [errores]="errores"></app-mostrar-errores>
 <form (submit)="Onsubmit()" [formGroup]="form">
   <mat-form-field appearance="outline">
     <mat-label>Nombre</mat-label>
@@ -13,7 +14,10 @@
 
   <app-input-img [urlImagenActual]="modelo?.foto" (archivoSeleccionado)="archivoSeleccionado($event)"></app-input-img>
  
-  <app-input-markdown (changeMarkdown)="cambioMarkdown($event)"></app-input-markdown>
+  <app-input-markdown
+  [contenidoMarkdown]="modelo?.biografia"
+   [placeHolderTextarea]="'Biografia'" 
+   (changeMarkdown)="cambioMarkdown($event)"></app-input-markdown>
   
   <div>
     <button mat-flat-button color="primary" [disabled]="form.invalid">

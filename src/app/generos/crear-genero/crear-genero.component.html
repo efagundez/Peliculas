@@ -1,4 +1,6 @@
 <h2>Crear Género</h2>
 
-<app-formulario-genero (submit)="guardarCambios($event)"></app-formulario-genero>
+<app-formulario-genero 
+[errores]="errores" 
+(onSubmit)="guardarCambios($event)"></app-formulario-genero>
 

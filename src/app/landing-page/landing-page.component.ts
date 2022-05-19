@@ -26,7 +26,7 @@ export class LandingPageComponent implements OnInit {
         titulo: "El Coco",
         fechaLanzamiento: new Date('2016-11-14'),
         precio: 2345.50,
-        poster: 'https://static.wikia.nocookie.net/terminator/images/a/a0/Terminator_3_Cartel.jpg/revision/latest/scale-to-width-down/250?cb=20150714112731&path-prefix=es'
+        poster: 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/terminator-6-poster-sarah-connor-1558597658.jpg?crop=1xw:1xh;center,top&resize=768:*'
       },
       /* {
         titulo: "Instant Family",

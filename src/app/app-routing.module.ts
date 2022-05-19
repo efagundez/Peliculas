@@ -23,7 +23,7 @@ const routes: Routes = [
   {path: 'actores', component: IndiceActoresComponent},
   {path: 'actores/crear', component: CrearActorComponent},
   {path: 'actores/editar/:id', component: EditarActorComponent},
-  {path: 'Cines', component: IndiceCinesComponent},
+  {path: 'cines', component: IndiceCinesComponent},
   {path: 'cines/crear', component: CrearCineComponent},
   {path: 'cines/editar/:id', component: EditarCineComponent},
   //{path: 'peliculas', component: IndiceActoresComponent},
