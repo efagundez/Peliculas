@@ -28,10 +28,10 @@ export class DetallePeliculaComponent implements OnInit {
           this.pelicula = pelicula;
           this.fechaLanzamiento = new Date(pelicula.fechaLanzamiento);
           this.trailerURL = this.generarURLYoutubeEmbed(this.pelicula.trailer);
-          // this.coordenadas = pelicula.cines.map(cine => {
-          //   return {
-          //     longitud: cine.longitud, latitud: cine.latitud, mensaje: cine.nombre
-          //   }});
+          this.coordenadas = pelicula.cines.map(cine => {
+            return {
+              longitud: cine.longitud, latitud: cine.latitud, mensaje: cine.nombre
+            }});
         })
       })
     }
