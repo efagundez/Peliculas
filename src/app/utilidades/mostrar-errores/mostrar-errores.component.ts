@@ -8,7 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class MostrarErroresComponent implements OnInit {
 
   @Input()
-  errores: string[] = []
+  errores: string[] = [];
 
   constructor() { }
 

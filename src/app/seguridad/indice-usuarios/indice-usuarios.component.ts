@@ -1,20 +1,21 @@
 import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
-import { generoDTO } from '../genero';
-import { GenerosService } from '../generos.service';
+import Swal from 'sweetalert2';
+import { usuarioDTO } from '../seguridad';
+import { SeguridadService } from '../seguridad.service';
 
 @Component({
-  selector: 'app-indice-generos',
-  templateUrl: './indice-generos.component.html',
-  styleUrls: ['./indice-generos.component.css']
+  selector: 'app-indice-usuarios',
+  templateUrl: './indice-usuarios.component.html',
+  styleUrls: ['./indice-usuarios.component.css']
 })
-export class IndiceGenerosComponent implements OnInit {
+export class IndiceUsuariosComponent implements OnInit {
 
-  constructor( private generosService: GenerosService) { }
+  constructor( private seguridadService: SeguridadService) { }
 
-  generos: generoDTO[];
-  columnasAMostrar = ['id', 'nombre', 'acciones'];
+  usuarios: usuarioDTO[];
+  columnasAMostrar = ['nombre', 'acciones'];
   cantidadTotalRegistros;
   paginaActual = 1;
   cantidadRegistrosAMostrar = 10;
@@ -31,9 +32,9 @@ export class IndiceGenerosComponent implements OnInit {
   }
 
   cargarRegistros(pagina: number, cantidadElementosAMostrar){
-    this.generosService.obtenerPaginado(pagina, cantidadElementosAMostrar).subscribe(
-      (respuesta: HttpResponse<generoDTO[]>) => {
-      this.generos = respuesta.body;
+    this.seguridadService.obtenerUsuarios(pagina, cantidadElementosAMostrar).subscribe(
+      (respuesta: HttpResponse<usuarioDTO[]>) => {
+      this.usuarios = respuesta.body;
       this.cantidadTotalRegistros = respuesta.headers.get("cantidadTotalRegistros");
     }/*), error => console.error(error)):*/ )
   }
@@ -44,12 +45,15 @@ export class IndiceGenerosComponent implements OnInit {
     this.cargarRegistros(this.paginaActual, this.cantidadRegistrosAMostrar);
   }
 
-  borrar(id: number){
-    this.generosService.borrar(id).subscribe({
-      next: () => this.cargarRegistros(this.paginaActual, this.cantidadRegistrosAMostrar),
-      error: (error) => console.error(error)
-    });
-
+  hacerAdmin(usuarioId: string){
+    this.seguridadService.hacerAdmin(usuarioId)
+    .subscribe(() => Swal.fire('Exitoso', 'La operación se ha realizado', 'success'));
   }
 
+  removerAdmin(usuarioId: string){
+    this.seguridadService.removerAdmin(usuarioId)
+    .subscribe(() => Swal.fire('Exitoso', 'La operación se ha realizado', 'success'));
+  }
+  
 }
+

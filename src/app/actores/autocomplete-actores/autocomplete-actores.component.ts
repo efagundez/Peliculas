@@ -23,16 +23,20 @@ export class AutocompleteActoresComponent implements OnInit {
   actoresSeleccionados: actorPeliculaDTO[] = [];
 
   actoresAMostrar: actorPeliculaDTO[] = [];
-  // actoresSeleccionados =  [];
+
 
   columnasAMostrar = ['imagen', 'nombre', 'personaje', 'acciones'];
 
   @ViewChild(MatTable) table: MatTable<any>;
+  
   ngOnInit(): void {
     this.control.valueChanges.subscribe( nombre => {
+      if (typeof nombre === 'string' && nombre) {
       this.actoresService.obtenerPorNombre(nombre).subscribe( actores => {
         this.actoresAMostrar = actores; 
-        })
+        })        
+      }
+
     });
     console.log(this.actoresAMostrar);
     

@@ -21,20 +21,24 @@ export class FormularioPeliculaComponent implements OnInit {
   errores: string[] = [];
 
   @Output()
-  Onsubmit: EventEmitter<PeliculaCreacionDTO> = new EventEmitter<PeliculaCreacionDTO>()
+  Onsubmit: EventEmitter<PeliculaCreacionDTO> = new EventEmitter<PeliculaCreacionDTO>();
 
   @Input()
   generosNoSeleccionados: MultipleSelectorModel[];
 
+  @Input()
   generosSeleccionados: MultipleSelectorModel[] = [];
 
   @Input()
   cinesNoSeleccionados: MultipleSelectorModel[] = [];
 
+  @Input()
   cinesSeleccionados: MultipleSelectorModel[] = [];
 
   @Input()
   actoresSeleccionados: actorPeliculaDTO[] = [];
+
+  imagenCambiada = false;
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
@@ -61,6 +65,7 @@ export class FormularioPeliculaComponent implements OnInit {
 
   archivoSeleccionado(archivo: File){
     this.form.get('poster').setValue(archivo);
+    this.imagenCambiada = true;
   }
 
   changeMarkdown(texto){
@@ -78,6 +83,10 @@ export class FormularioPeliculaComponent implements OnInit {
       return {id: val.id, personaje: val.personaje}
     });
     this.form.get('actores').setValue(actores);
+
+    if(this.imagenCambiada){
+      this.form.patchValue({'poster': null});
+    }
 
     this.Onsubmit.emit(this.form.value);
   }
